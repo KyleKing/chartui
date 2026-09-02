@@ -24,3 +24,34 @@ column-cost table comparing them. Look at:
   edge cases
 
 Full writeup: [`spikes/FINDINGS-2.md`](FINDINGS-2.md).
+
+## Spike 3: transitions
+
+Run interactively:
+
+```sh
+uv run python spikes/spike3_transitions.py
+```
+
+Run non-interactively (plays every variant on a timer, for recording):
+
+```sh
+uv run python spikes/spike3_transitions.py --auto
+```
+
+Keys: `1`/`2`/`3` pick 5/10/20 frames, `t` toggles the tween on/off, `e` toggles linear
+vs ease_out_cubic easing, `space` swaps to the other dataset, `q` quits. Look at:
+
+- whether a tweened swap (`t` on, `space`) reads as motion or as a jittery jump,
+  compared with an instant swap (`t` off, `space`)
+- whether 20 frames looks smoother than 10, or indistinguishable
+- whether `ease_out_cubic` (`e`) visibly decelerates into place versus `linear`'s
+  constant speed
+- the fading columns at the chart's edges (points present in only one dataset): do they
+  read as entering/exiting, or just as noise
+- the printed timing table (frame and transition times against the 16 ms/200 ms
+  budgets) and the "observed swap timings" printed after quitting
+- `spikes/out/transition-*.txt`/`.ansi` for static frames, and
+  `spikes/out/spike3.gif` (from `spikes/spike3.tape`) for the recorded motion
+
+Full writeup: [`spikes/FINDINGS-3.md`](FINDINGS-3.md).
