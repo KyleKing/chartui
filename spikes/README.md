@@ -4,6 +4,29 @@ Throwaway experiments for chartui's design, one per numbered question in DESIGN.
 "Spikes" section. Each writes its rendered frames to `spikes/out/` (gitignored) and its
 conclusions to `spikes/FINDINGS-<n>.md`.
 
+## Spike 1: canvas look
+
+Run:
+
+```sh
+uv run python spikes/spike1_canvas.py
+```
+
+Draws the four tail-cw charts (flat line with one spike, two converging series, a
+severity histogram, a min-max band with a median) on the bitmap canvas at all six glyph
+strategies, plus a linecast float-framebuffer reference for each. Look at:
+
+- the glyph-coverage probe line at the top of every page. If `octant=` shows a box, this
+  font has no Unicode 16 coverage and every `*-octant.*` frame is unusable here
+- `spikes/out/two-converging-series-{braille,quadrant,linecast}.ansi` for the
+  bitmap-versus-float difference: Bresenham staircasing against a Gaussian-blended curve
+- `spikes/out/*-braille.ansi` against `*-octant.ansi` for braille's inter-dot gaps
+- `spikes/out/min-max-band-with-median-*.txt` for what a background-layer fill leaves
+  behind with no color
+- the printed timing table against the 16 ms budget
+
+Full writeup: [`spikes/FINDINGS-1.md`](FINDINGS-1.md).
+
 ## Spike 2: layout and ticks
 
 Run:
