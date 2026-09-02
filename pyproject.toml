@@ -140,6 +140,18 @@ known-first-party = ['chartui']
 'scripts/check_imports.py' = [
   'unused-import', # imported but unused; consider adding to __all__ or using a redundant alias
 ]
+'spikes/*.py' = [
+  'import-private-name', # spikes intentionally drive linecast's private modules directly
+  'implicit-namespace-package', # spikes/ has no __init__.py; it is a flat script directory, not a package
+  'no-self-use', # Glyphs implementations are dispatched polymorphically, even where to_char ignores self
+  'print', # spikes render to the terminal by design
+  'suspicious-non-cryptographic-random-usage', # sample data is deterministic test fixture data, not security-sensitive
+  'undocumented-public-class', # throwaway spike code, deleted once DESIGN.md is updated
+  'undocumented-public-function', # throwaway spike code, deleted once DESIGN.md is updated
+  'undocumented-public-init', # throwaway spike code, deleted once DESIGN.md is updated
+  'undocumented-public-method', # throwaway spike code, deleted once DESIGN.md is updated
+  'undocumented-public-module', # throwaway spike code, deleted once DESIGN.md is updated
+]
 'tests/*.py' = [
   'assert', # Use of `assert` detected
   'import-private-name', # Private name import `_<>` from external module
